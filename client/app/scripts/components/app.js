@@ -2,26 +2,11 @@ import debug from 'debug';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Logo from './logo';
-import Footer from './footer.js';
-import Sidebar from './sidebar.js';
-import HelpPanel from './help-panel';
-import Search from './search';
-import Status from './status.js';
-import Topologies from './topologies.js';
-import TopologyOptions from './topology-options.js';
 import { getApiDetails, getTopologies } from '../utils/web-api-utils';
 import { focusSearch, pinNextMetric, hitBackspace, hitEnter, hitEsc, unpinMetric,
   selectMetric, toggleHelp, toggleGridMode } from '../actions/app-actions';
-import Details from './details';
 import Nodes from './nodes';
-import GridModeSelector from './grid-mode-selector';
-import MetricSelector from './metric-selector';
-import NetworkSelector from './networks-selector';
-import EmbeddedTerminal from './embedded-terminal';
 import { getRouter } from '../utils/router-utils';
-import DebugToolbar, { showingDebugToolbar,
-  toggleDebugToolbar } from './debug-toolbar.js';
 import { getUrlState } from '../utils/router-utils';
 import { getActiveTopologyOptions } from '../utils/topology-utils';
 
@@ -67,7 +52,6 @@ class App extends React.Component {
     } else if (ev.keyCode === BACKSPACE_KEY_CODE) {
       this.props.dispatch(hitBackspace());
     } else if (ev.code === 'KeyD' && ev.ctrlKey && !showingTerminal) {
-      toggleDebugToolbar();
       this.forceUpdate();
     }
   }
@@ -102,10 +86,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { gridMode, showingDetails, showingHelp, showingMetricsSelector,
-      showingNetworkSelector, showingTerminal } = this.props;
-    const isIframe = window !== window.top;
-
     return (
       <div className="app">
         <Nodes />
